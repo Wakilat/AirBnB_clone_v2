@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#r!/usr/bin/python3
 """ Function that deploys """
 from datetime import datetime
 from fabric.api import *
@@ -6,21 +6,12 @@ import os
 import shlex
 
 
-env.hosts = ['35.231.33.237', '34.74.155.163']
+env.hosts = ['34.236.33.201', '44.192.76.231']
 env.user = "ubuntu"
 
 
-def deploy():
-    """ DEPLOYS """
-    try:
-        archive_path = do_pack()
-    except:
-        return False
-
-    return do_deploy(archive_path)
-
-
 def do_pack():
+    """ archives """
     try:
         if not os.path.exists("versions"):
             local('mkdir versions')
@@ -61,3 +52,12 @@ def do_deploy(archive_path):
         return True
     except:
         return False
+
+def deploy():
+    """ archives and deploy"""
+    try:
+        archive_path = do_pack()
+    except:
+        return False
+
+    return do_deploy(archive_path)
